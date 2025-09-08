@@ -1,33 +1,65 @@
-name: "Test Project"
+# name: "Test Project"
+# on: [push, workflow_dispatch]
+# jobs:
+#   test:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Get code
+#         uses: actions/checkout@v5
+#       - name: Install NodeJS
+#         uses: actions/setup-node@v5
+#         with:
+#           node-version: 18
+#       - name: Install dependencies
+#         run: npm ci
+#       - name: Run Tests
+#         run: npm test
+#   deploy:
+#     needs: test ### to run this job sequentially, after executing test job
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Get code
+#         uses: actions/checkout@v5
+#       - name: Install NodeJS
+#         uses: actions/setup-node@v5
+#         with:
+#           node-version: 18
+#       - name: Install dependencies
+#         run: npm ci
+#       - name: Build Project
+#         run: npm run build
+#       - name: Deploy
+#         run: echo "Deploying!!!!!"
+
+
+
+name: Test and Deploy
 on: [push, workflow_dispatch]
-jobs:
-  test:
+jobs: 
+  Test:
     runs-on: ubuntu-latest
     steps:
-      - name: Get code
+      - name: Get Repository
         uses: actions/checkout@v5
-      - name: Install NodeJS
+      - name: Install NodeJs
         uses: actions/setup-node@v5
         with:
-          node-version: 18
+           node-version: 18
       - name: Install dependencies
         run: npm ci
       - name: Run Tests
         run: npm test
-  deploy:
-    needs: test ### to run this job sequentially, after executing test job
+  Deploy:
+    needs: Test
     runs-on: ubuntu-latest
     steps:
-      - name: Get code
+      - name: Get Repository
         uses: actions/checkout@v5
-      - name: Install NodeJS
+      - name: Install NodeJs
         uses: actions/setup-node@v5
         with:
-          node-version: 18
-      - name: Install dependencies
-        run: npm ci
+           node-version: 18
       - name: Build Project
         run: npm run build
-      - name: Deploy
-        run: echo "Deploying!!!!!"
-
+      - name: Deploy Project
+        run: echo "Deploying!!!!"
