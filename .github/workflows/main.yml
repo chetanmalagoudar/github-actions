@@ -5,7 +5,9 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: print greeting
-        run: echo "hello world"
+        run: | 
+             echo "hello world"
+             echo "hello to chetan from anusha!!!!"
       - name: print Done
         run: echo "hello goodbye!!"
         
